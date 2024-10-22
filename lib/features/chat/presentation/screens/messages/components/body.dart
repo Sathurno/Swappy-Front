@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../models/chat_message.dart';
 import 'chat_input_field.dart';
 import 'message.dart';
@@ -14,29 +13,12 @@ class Body extends StatefulWidget {
 
 class BodyState extends State<Body> {
   final List<ChatMessage> messages = [];
-  final ImagePicker _picker = ImagePicker();
 
   void _handleSendMessage(String messageText) {
     if (messageText.isNotEmpty) {
       final message = ChatMessage(
         messageType: ChatMessageType.text,
         messageContent: messageText,
-        isSender: true,
-        messageStatus: MessageStatus.viewed,
-      );
-
-      setState(() {
-        messages.add(message);
-      });
-    }
-  }
-
-  Future<void> _handleImageSelection() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      final message = ChatMessage(
-        messageType: ChatMessageType.image,
-        messageContent: image.path,
         isSender: true,
         messageStatus: MessageStatus.viewed,
       );
@@ -65,7 +47,6 @@ class BodyState extends State<Body> {
           onMessageSent: (String messageText) {
             _handleSendMessage(messageText);
           },
-          onImageSelected: _handleImageSelection, // Manejar selección de imagen
         ),
       ],
     );

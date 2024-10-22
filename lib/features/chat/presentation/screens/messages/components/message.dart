@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:io'; // Para manejar archivos
 import '../../../../constants.dart';
 import '../../../models/chat_message.dart';
 
@@ -14,15 +12,7 @@ class Message extends StatelessWidget {
     Widget messageContent(ChatMessage message) {
       switch (message.messageType) {
         case ChatMessageType.text:
-          return Text(message.messageContent); // Muestra el texto
-        case ChatMessageType.image:
-          return Image.file(File(message.messageContent)); // Muestra la imagen
-        case ChatMessageType.audio:
-          return Text(
-              "Audio: ${message.messageContent}"); // Muestra texto para el audio
-        case ChatMessageType.video:
-          return Text(
-              "Video: ${message.messageContent}"); // Muestra texto para el video
+          return Text(message.messageContent);
         default:
           return const SizedBox();
       }
